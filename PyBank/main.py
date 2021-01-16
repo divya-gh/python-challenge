@@ -2,7 +2,7 @@ import os
 import csv
 os.system("cls")
 
-#function to map greatest increase in profits date and amount by creating a dictionary
+#Function to create a dictionary of date and amount change
 '''----------------------------------------------------------------------------------'''
 def profit_date_amount(dates , p_l_change):
     #initialize the dictionary
@@ -15,12 +15,13 @@ def profit_date_amount(dates , p_l_change):
             for value in p_l_change:
                 #Assign difference values to each date
                 date_and_amount[key] = value
-                #remove previous so that if doesnt get re-assignedsure 
+                #remove previous value avoid re-assignment
                 p_l_change.remove(value) 
                 break
     return date_and_amount
 
-#Function to calculate changes in "Profit/Losses" over the entire period and thier average
+#Function to calculate changes in "Profit/Losses" over the entire period and thier average change
+'''------------------------------------------------------------------------------------------'''
 def calc_avg_change(profit_losses):
     monthly_diff = []
     for i in range(1,len(profit_losses)):
@@ -48,9 +49,9 @@ py_bank_path = os.path.join(".", "Resources", "budget_data.csv")
 '''----------------------'''
 with open(py_bank_path, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
-    #sepearte header
+    #seperate header
     header = next(csvreader)
-    #read rest of the rows 
+    #read rows
     for row in csvreader:
         #creating a list of dates and profit/losses
         dates.append(row[0])
@@ -105,7 +106,7 @@ print(f"Greatest Decrease in Profits: {loss_date} (${greatest_decrease})")
 #5 print the analysis in a text file with the results.
 '''------------------------------------------------'''
 #set file path
-file_path = os.path.join(".", "analysis", "py_Bank_analysis.txt")
+file_path = os.path.join(".", "analysis", "Py_Bank_analysis.txt")
 
 # Open the file in "read" mode ('r') and store the contents in the variable "text"
 with open(file_path, 'w') as text_file:
