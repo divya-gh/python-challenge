@@ -81,6 +81,7 @@ greatest_increase = max(monthly_change)
 
 #Call the function to create a dictionary of Months and profit/losses change
 month_amount_dict = profit_date_amount(dates , monthly_change)
+
 #Find date and max_change amount
 for key in month_amount_dict:
     if month_amount_dict[key] == greatest_increase:
@@ -90,12 +91,14 @@ print(f"Greatest Increase in Profits: $ {profit_date} (${greatest_increase})")
 
 #4. The greatest decrease in losses (date and amount) over the entire period
 '''------------------------------------------------------------------------'''
-#Find min diff in profit/losses
-greatest_decre = min(monthly_change)
+#montly_change has been deleted while creating a dictionary of date and change amount ; to get it back, call function
+average , monthly_change = calc_avg_change(profit_loss)
+#Find max diff in profit/losses
+greatest_decrease = min(monthly_change)
 #Find date and max change amount using month_amount_dict dictionary
 for key  in month_amount_dict:
-    if month_amount_dict[key] == greatest_decre:
+    if month_amount_dict[key] == greatest_decrease:
         loss_date = key
         break
-print(f"Greatest Decrease in Profits: $ {loss_date} (${greatest_decre})")
+print(f"Greatest Decrease in Profits: $ {loss_date} (${greatest_decrease})")
 
