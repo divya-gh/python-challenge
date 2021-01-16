@@ -2,70 +2,109 @@ import os
 import csv
 os.system("cls")
 
-#getting the path for the csv file
-py_bank_path = os.path.join(".", "Resources", "budget_data.csv")
+#function to map greatest increase in profits date and amount by creating a dictionary
+'''----------------------------------------------------------------------------------'''
+def profit_date_amount(dates , p_l_change):
+    #initialize the dictionary
+    date_and_amount={}
+    for key in dates:
+        #Assign value "0" to the first date
+        if key == 'Jan-2010':
+            date_and_amount[key] = 0
+        else:
+            for value in p_l_change:
+                #Assign difference values to each date
+                date_and_amount[key] = value
+                #remove previous so that if doesnt get re-assignedsure 
+                p_l_change.remove(value) 
+                break
+    return date_and_amount
+
+#Function to calculate changes in "Profit/Losses" over the entire period and thier average
+def calc_avg_change(profit_losses)
+    monthly_diff = []
+    for i in range(1,len(profit_losses)):
+        change = int(profit_losses[i]) - int(profit_losses[i-1])
+        monthly_diff.append(change)
+    average_change  = sum(monthly_diff)/len(monthly_diff)  
+    return average_change , monthly_diff
+
 
 #Inititalize date and profit/loss as a list
-date =[]
+'''--------------------------------------------'''
+dates =[]
 profit_loss = []
 
 #Initialize total amount of "Profit/Losses" over the entire period
+'''---------------------------------------------------------------'''
 total_Profit_Losses = 0
 
+
+#Get csv file path
+'''---------------'''
+py_bank_path = os.path.join(".", "Resources", "budget_data.csv")
+
 #Open csv budget_data file
+'''----------------------'''
 with open(py_bank_path, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
-    #sepearting header
+    #sepearte header
     header = next(csvreader)
     #read rest of the rows 
     for row in csvreader:
         #creating a list of dates and profit/losses
-        date.append(row[0])
+        dates.append(row[0])
         profit_loss.append(row[1])
         #calculating total profit/losses
-        total_Profit_Losses+=int(row[1])
-        
-   
+        total_Profit_Losses+=int(row[1])  
     
 
-#total  number of months
-total_months = len(date)
-print(total_months)
-print(total_Profit_Losses)
-#net total amount of 
+#1. The total number of months included in the dataset
+'''-------------------------------------------------'''
+total_months = len(dates)
+print(f"Total Months: {total_months}")
 
-#net_total_amount = sum(profit_loss)
-#print(net_total_amount)
+#2. The net total amount of "Profit/Losses" over the entire period
+'''-------------------------------------------------------------'''
+print(f"Total: {total_Profit_Losses}")
 
-#Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
-P_L_Change_list = []
-for i in range(1,len(profit_loss)):
-    profit_loss_change = int(profit_loss[i]) - int(profit_loss[i-1])
-    P_L_Change_list.append(profit_loss_change)
-    
+#3. Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
+'''----------------------------------------------------------------------------------------------------'''
+#Call the function calc_avg_change(profit_loss) that calculates the average change 
+average_change , monthly_change= calc_avg_change(profit_loss)
+print(f"Average  Change: $ {round(average_change,2)}")
 
-#print(changes)
-#percentage 
-average_change  = sum(P_L_Change_list)/len(P_L_Change_list)
-print(f"Average Change: $ {round(average_change,2)} ")
+#4. The greatest increase in profits (date and amount) over the entire period
+'''------------------------------------------------------------------------'''
+#Find max diff in profit/losses
 greatest_increase = max(P_L_Change_list)
+#Call the function to create a dictionary of Months and profit/losses change
+month_amount_dict = profit_date_amount(dates , monthly_change)
+#Find date and max change amount
+for key,value in month_amount_dict:
+    if value == greatest_increase:
+        great_date = key
+
+#4. The greatest increase in profits (date and amount) over the entire period
+'''------------------------------------------------------------------------'''
+#Find max diff in profit/losses
+greatest_increase = max(P_L_Change_list)
+#Call the function to create a dictionary of Months and profit/losses change
+month_amount_dict = profit_date_amount(dates , monthly_change)
+#Find date and max change amount
+for key,value in month_amount_dict:
+    if value == greatest_increase:
+        great_date = key
+
 greatest_decrease =min(P_L_Change_list)
 
 print(greatest_increase)
 print(greatest_decrease)
 print("change list")
 #print(P_L_Change_list)
-print("Date: ")
-#print(date)
+print("Dates: ")
+#print(dates)
 
-pair={}
-for key in date:
-    if key == 'Jan-2010':
-        pair[key] = 0
-    else:
-        for value in P_L_Change_list:
-            pair[key] = value
-            P_L_Change_list.remove(value) 
-            break
 
-print(pair)
+
+'''
