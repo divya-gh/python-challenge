@@ -91,9 +91,9 @@ print(f"Greatest Increase in Profits: $ {profit_date} (${greatest_increase})")
 
 #4. The greatest decrease in losses (date and amount) over the entire period
 '''------------------------------------------------------------------------'''
-#montly_change has been deleted while creating a dictionary of date and change amount ; to get it back, call function
-average , monthly_change = calc_avg_change(profit_loss)
-#Find max diff in profit/losses
+#montly_change has been deleted while creating a dictionary of date and change amount ; to get it back, call function again
+average_change , monthly_change = calc_avg_change(profit_loss)
+#Find min diff in profit/losses
 greatest_decrease = min(monthly_change)
 #Find date and max change amount using month_amount_dict dictionary
 for key  in month_amount_dict:
