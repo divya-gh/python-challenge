@@ -53,4 +53,19 @@ greatest_decrease =min(P_L_Change_list)
 
 print(greatest_increase)
 print(greatest_decrease)
-print(P_L_Change_list)
+print("change list")
+#print(P_L_Change_list)
+print("Date: ")
+#print(date)
+
+pair={}
+for key in date:
+    if key == 'Jan-2010':
+        pair[key] = 0
+    else:
+        for value in P_L_Change_list:
+            pair[key] = value
+            P_L_Change_list.remove(value) 
+            break
+
+print(pair)
