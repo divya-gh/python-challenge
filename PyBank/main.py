@@ -29,11 +29,11 @@ print(total)
 
 #Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
 changes= []
-for i in range(len(profit_loss)):
-    if i == len(profit_loss) :
-        break
-    else:
-        changes.append(int(profit_loss[i+1]) - int(profit_loss[i]))
+for i in range(1,len(profit_loss)):
+   changes.append(int(profit_loss[i]) - int(profit_loss[i-1]))
     
 
-print(changes)
+#print(changes)
+#percentage 
+average_change  = sum(changes)/len(changes)
+print(f"Average Change: $ {average_change} ")
