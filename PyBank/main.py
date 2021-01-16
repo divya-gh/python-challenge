@@ -83,28 +83,16 @@ month_amount_dict = profit_date_amount(dates , monthly_change)
 #Find date and max change amount
 for key,value in month_amount_dict:
     if value == greatest_increase:
-        great_date = key
+        profit_date = key
+print(f"Greatest Increase in Profits: $ {profit_date} (${greatest_increase})")
 
-#4. The greatest increase in profits (date and amount) over the entire period
+#4. The greatest decrease in losses (date and amount) over the entire period
 '''------------------------------------------------------------------------'''
-#Find max diff in profit/losses
-greatest_increase = max(P_L_Change_list)
-#Call the function to create a dictionary of Months and profit/losses change
-month_amount_dict = profit_date_amount(dates , monthly_change)
-#Find date and max change amount
-for key,value in month_amount_dict:
-    if value == greatest_increase:
-        great_date = key
-
+#Find min diff in profit/losses
 greatest_decrease =min(P_L_Change_list)
+#Find date and max change amount using month_amount_dict dictionary
+for key,value in month_amount_dict:
+    if value == greatest_decrease:
+        loss_date = key
+print(f"Greatest Decrease in Profits: $ {loss_date} (${greatest_decrease})")
 
-print(greatest_increase)
-print(greatest_decrease)
-print("change list")
-#print(P_L_Change_list)
-print("Dates: ")
-#print(dates)
-
-
-
-'''
