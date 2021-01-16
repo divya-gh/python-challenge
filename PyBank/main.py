@@ -58,7 +58,7 @@ with open(py_bank_path, newline='') as csvfile:
         #calculating total profit/losses
         total_Profit_Losses+=int(row[1])  
     
-
+print("Financial Analysis \n----------------------------")
 #1. The total number of months included in the dataset
 '''-------------------------------------------------'''
 total_months = len(dates)
@@ -66,13 +66,13 @@ print(f"Total Months: {total_months}")
 
 #2. The net total amount of "Profit/Losses" over the entire period
 '''-------------------------------------------------------------'''
-print(f"Total: {total_Profit_Losses}")
+print(f"Total: ${total_Profit_Losses}")
 
 #3. Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
 '''----------------------------------------------------------------------------------------------------'''
 #Call the function calc_avg_change(profit_loss) that calculates the average change 
 average_change , monthly_change= calc_avg_change(profit_loss)
-print(f"Average  Change: $ {round(average_change,2)}")
+print(f"Average  Change: ${round(average_change,2)}")
 
 #4. The greatest increase in profits (date and amount) over the entire period
 '''------------------------------------------------------------------------'''
@@ -87,7 +87,7 @@ for key in month_amount_dict:
     if month_amount_dict[key] == greatest_increase:
         profit_date = key
         break
-print(f"Greatest Increase in Profits: $ {profit_date} (${greatest_increase})")
+print(f"Greatest Increase in Profits: {profit_date} (${greatest_increase})")
 
 #4. The greatest decrease in losses (date and amount) over the entire period
 '''------------------------------------------------------------------------'''
@@ -100,5 +100,23 @@ for key  in month_amount_dict:
     if month_amount_dict[key] == greatest_decrease:
         loss_date = key
         break
-print(f"Greatest Decrease in Profits: $ {loss_date} (${greatest_decrease})")
+print(f"Greatest Decrease in Profits: {loss_date} (${greatest_decrease})")
+
+#5 print the analysis in a text file with the results.
+'''------------------------------------------------'''
+#set file path
+file_path = os.path.join(".", "analysis", "py_Bank_analysis.txt")
+
+# Open the file in "read" mode ('r') and store the contents in the variable "text"
+with open(file_path, 'w') as text_file:
+
+    # Store all of the text inside a variable called "lines"
+    text_file.write("Financial Analysis \n----------------------------")
+    text_file.write(f"\nTotal Months: {total_months}")
+    text_file.write(f"\nTotal: ${total_Profit_Losses}")
+    text_file.write(f"\nAverage  Change: ${round(average_change,2)}")
+    text_file.write(f"\nGreatest Increase in Profits: {profit_date} (${greatest_increase})")
+    text_file.write(f"\nGreatest Decrease in Profits: {loss_date} (${greatest_decrease})")
+   
+
 
