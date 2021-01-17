@@ -2,24 +2,6 @@ import os
 import csv
 os.system("cls")
 
-#Function to create a dictionary of date and amount change
-'''----------------------------------------------------------------------------------'''
-def profit_date_amount(dates , p_l_change):
-    #initialize the dictionary
-    date_and_amount={}
-    for key in dates:
-        #Assign value "0" to the first date
-        if key == 'Jan-2010':
-            date_and_amount[key] = 0
-        else:
-            for value in p_l_change:
-                #Assign difference values to each date
-                date_and_amount[key] = value
-                #remove previous value avoid re-assignment
-                p_l_change.remove(value) 
-                break
-    return date_and_amount
-
 #Function to calculate changes in "Profit/Losses" over the entire period and thier average change
 '''------------------------------------------------------------------------------------------'''
 def calc_avg_change(profit_losses):
@@ -34,18 +16,14 @@ def calc_avg_change(profit_losses):
 #Inititalize date and profit/loss as a list
 '''--------------------------------------------'''
 dates =[]
-profit_loss = []
-
-#Initialize total amount of "Profit/Losses" over the entire period
-'''---------------------------------------------------------------'''
+profit_losses = []
 total_Profit_Losses = 0
-
 
 #Get csv file path
 '''---------------'''
 py_bank_path = os.path.join(".", "Resources", "budget_data.csv")
 
-#Open csv budget_data file
+#Open budget_data csv file
 '''----------------------'''
 with open(py_bank_path, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
@@ -55,9 +33,11 @@ with open(py_bank_path, newline='') as csvfile:
     for row in csvreader:
         #creating a list of dates and profit/losses
         dates.append(row[0])
-        profit_loss.append(row[1])
+        profit_losses.append(row[1])
         #calculating total profit/losses
         total_Profit_Losses+=int(row[1])  
+
+        
     
 print("Financial Analysis \n----------------------------")
 #1. The total number of months included in the dataset
@@ -65,53 +45,47 @@ print("Financial Analysis \n----------------------------")
 total_months = len(dates)
 print(f"Total Months: {total_months}")
 
+
 #2. The net total amount of "Profit/Losses" over the entire period
 '''-------------------------------------------------------------'''
 print(f"Total: ${total_Profit_Losses}")
 
+
 #3. Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
 '''----------------------------------------------------------------------------------------------------'''
 #Call the function calc_avg_change(profit_loss) that calculates the average change 
-average_change , monthly_change= calc_avg_change(profit_loss)
+average_change , monthly_change = calc_avg_change(profit_losses)
 print(f"Average  Change: ${round(average_change,2)}")
+
 
 #4. The greatest increase in profits (date and amount) over the entire period
 '''------------------------------------------------------------------------'''
+#Exclude first month
+dates.pop(0)
+
 #Find max diff in profit/losses
 greatest_increase = max(monthly_change)
-
-#Call the function to create a dictionary of Months and profit/losses change
-month_amount_dict = profit_date_amount(dates , monthly_change)
-
-#Find date and max_change amount
-for key in month_amount_dict:
-    if month_amount_dict[key] == greatest_increase:
-        profit_date = key
-        break
+profit_date = dates[monthly_change.index(greatest_increase)]
 print(f"Greatest Increase in Profits: {profit_date} (${greatest_increase})")
+
 
 #4. The greatest decrease in losses (date and amount) over the entire period
 '''------------------------------------------------------------------------'''
-#montly_change has been deleted while creating a dictionary of date and change amount ; to get it back, call function again
-average_change , monthly_change = calc_avg_change(profit_loss)
 #Find min diff in profit/losses
 greatest_decrease = min(monthly_change)
-#Find date and max change amount using month_amount_dict dictionary
-for key  in month_amount_dict:
-    if month_amount_dict[key] == greatest_decrease:
-        loss_date = key
-        break
+loss_date = dates[monthly_change.index(greatest_decrease)]
 print(f"Greatest Decrease in Profits: {loss_date} (${greatest_decrease})")
+
 
 #5 print the analysis in a text file with the results.
 '''------------------------------------------------'''
 #set file path
 file_path = os.path.join(".", "analysis", "Py_Bank_analysis.txt")
 
-# Open the file in "read" mode ('r') and store the contents in the variable "text"
+# Open file in "write" mode ('w') .
 with open(file_path, 'w') as text_file:
 
-    # Store all of the text inside a variable called "lines"
+    # write lines into the file
     text_file.write("Financial Analysis \n----------------------------")
     text_file.write(f"\nTotal Months: {total_months}")
     text_file.write(f"\nTotal: ${total_Profit_Losses}")
