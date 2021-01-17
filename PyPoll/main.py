@@ -34,7 +34,9 @@ with open(py_poll_path, newline='') as csvfile:
             candidate_votes[row[2]] = candidate_votes[row[2]] + 1
 
 
-        
+
+
+
         
         
 
@@ -49,7 +51,12 @@ print(candidate_votes)
 ##printing results to terminal:    
 print("Election Results \n----------------------------")
 print(f"Total Votes: {total_votes}\n----------------------------")
-#
+#calculate percentage of votes per candidates.    
+for key in candidate_votes:
+    percentage = candidate_votes[key]/total_votes
+    print(f"{key}: {percentage} ({candidate_votes[key]})")
+#printing winner
+winner = max(candidate_votes)
 #print(f"Winner: {}\n----------------------------")
 #
 
