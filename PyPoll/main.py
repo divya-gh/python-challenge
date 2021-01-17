@@ -49,7 +49,7 @@ for key in candidate_votes:
     #Find winner based on max_value and print winner
     if candidate_votes[key] == max_vote:
         winner = key
-    print(f"Winner: {winner}\n----------------------------")
+print(f"Winner: {winner}\n----------------------------")
 
 
 
@@ -63,6 +63,6 @@ with open(poll_path, 'w') as text_file:
     text_file.write("Election Results \n----------------------------")
     text_file.write(f"\nTotal Votes: {total_votes}\n----------------------------")
     for key in candidate_votes:
-        text_file.write(f"{key}: {round(percentage[key], 2)} ({candidate_votes[key]})")
+        text_file.write(f"\n{key}: {round(percentage[key], 2)} ({candidate_votes[key]})")
     text_file.write(f"Winner: {winner}\n----------------------------")
     
