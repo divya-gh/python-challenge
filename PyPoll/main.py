@@ -53,8 +53,8 @@ print("Election Results \n----------------------------")
 print(f"Total Votes: {total_votes}\n----------------------------")
 #calculate percentage of votes per candidates.    
 for key in candidate_votes:
-    percentage = candidate_votes[key]/total_votes
-    print(f"{key}: {percentage} ({candidate_votes[key]})")
+    percentage = (candidate_votes[key]/total_votes) * 100
+    print(f"{key}: {round(percentage , 3)} ({candidate_votes[key]})")
 #printing winner
 winner = max(candidate_votes)
 #print(f"Winner: {}\n----------------------------")
