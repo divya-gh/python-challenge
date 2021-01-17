@@ -2,10 +2,9 @@ import os
 import csv
 os.system("cls")
 
-#Inititalize date and profit/loss as a list
-'''--------------------------------------------'''
+#Inititalize candidates as a list and candidate_votes as a dictionary
+'''-----------------------------------------------------------------'''
 candidates =[]
-average = 0
 total_votes = 0
 candidate_votes = {}
 vote_count = 0
@@ -32,22 +31,20 @@ with open(py_poll_path, newline='') as csvfile:
         else:
             candidate_votes[row[2]] = candidate_votes[row[2]] + 1      
 
-#candidates list and candidates per vote dictionary
-#print(candidates) 
-#print(candidate_votes)  
 
-##printing results to terminal:    
+
+#printing results to terminal:    
 print("Election Results \n----------------------------")
 print(f"Total Votes: {total_votes}\n----------------------------")
 #calculate percentage of votes per candidate and print winner.  
 percentage ={}  
 max_vote = max(candidate_votes.values())
 for key in candidate_votes:
-    percent = (candidate_votes[key]/total_votes)
-    percentage[key] = "{:.3%}".format(percent)
-    #printing percentage
+    average = (candidate_votes[key]/total_votes)
+    percentage[key] = "{:.3%}".format(average)
+    #printing percentage per candidate to terminal
     print(f"{key}: {percentage[key]} ({candidate_votes[key]})")
-    #Find winner based on max_value and print winner
+    #Find winner based on max_value and print it to terminal
     if candidate_votes[key] == max_vote:
         winner = key
 print(f"----------------------------\nWinner: {winner}\n----------------------------")
@@ -60,7 +57,7 @@ poll_path = os.path.join(".", "analysis", "Poll_analysis.txt")
 # Open file in "write" mode ('w') .
 with open(poll_path, 'w') as text_file:
 
-    # write lines into the file
+    # write lines to file
     text_file.write("Election Results \n----------------------------")
     text_file.write(f"\nTotal Votes: {total_votes}\n----------------------------")
     for key in candidate_votes:
