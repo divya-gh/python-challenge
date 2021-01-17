@@ -64,5 +64,5 @@ with open(poll_path, 'w') as text_file:
     text_file.write(f"\nTotal Votes: {total_votes}\n----------------------------")
     for key in candidate_votes:
         text_file.write(f"\n{key}: {round(percentage[key], 2)} ({candidate_votes[key]})")
-    text_file.write(f"Winner: {winner}\n----------------------------")
+    text_file.write(f"\n----------------------------\nWinner: {winner}\n----------------------------")
     
