@@ -28,8 +28,7 @@ with open(py_poll_path, newline='') as csvfile:
         if row[2] not in candidates:
             candidates.append(row[2])
             #calculate total votes per candidates and add them to a dictionary.
-            vote_count+=1
-            candidate_votes[row[2]] = vote_count
+            candidate_votes[row[2]] = vote_count +1
         else:
             candidate_votes[row[2]] = candidate_votes[row[2]] + 1
 
