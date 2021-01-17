@@ -43,7 +43,7 @@ print(f"Total Votes: {total_votes}\n----------------------------")
 percentage ={}  
 max_vote = max(candidate_votes.values())
 for key in candidate_votes:
-    percentage[key] = (candidate_votes[key]/total_votes) * 100
+    percentage[key] = (candidate_votes[key]/total_votes) 
     #printing percentage
     print(f"{key}: {round(percentage[key], 2)} ({candidate_votes[key]})")
     #Find winner based on max_value and print winner
