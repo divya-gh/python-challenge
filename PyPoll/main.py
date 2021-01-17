@@ -39,13 +39,14 @@ with open(py_poll_path, newline='') as csvfile:
 ##printing results to terminal:    
 print("Election Results \n----------------------------")
 print(f"Total Votes: {total_votes}\n----------------------------")
-#calculate percentage of votes per candidates and print winner.    
+#calculate percentage of votes per candidate and print winner.  
+percentage ={}  
 max_vote = max(candidate_votes.values())
 for key in candidate_votes:
-    percentage = (candidate_votes[key]/total_votes) * 100
+    percentage[key] = (candidate_votes[key]/total_votes) * 100
     #printing percentage
-    print(f"{key}: {round(percentage, 2)} ({candidate_votes[key]})")
-    #Find winner based on max values and print winner
+    print(f"{key}: {round(percentage[key], 2)} ({candidate_votes[key]})")
+    #Find winner based on max_value and print winner
     if candidate_votes[key] == max_vote:
         winner = key
     print(f"Winner: {winner}\n----------------------------")
@@ -61,4 +62,7 @@ with open(poll_path, 'w') as text_file:
     # write lines into the file
     text_file.write("Election Results \n----------------------------")
     text_file.write(f"\nTotal Votes: {total_votes}\n----------------------------")
+    for key in candidate_votes:
+        text_file.write(f"{key}: {round(percentage[key], 2)} ({candidate_votes[key]})")
+    text_file.write(f"Winner: {winner}\n----------------------------")
     
