@@ -56,11 +56,11 @@ print(f"Total Votes: {total_votes}\n----------------------------")
 
 #Set csv file path to write
 '''------------------------'''
-poll_path = os.path.join(".", "Resources", "Poll_analysis.csv")
+poll_path = os.path.join(".", "analysis", "Poll_analysis.txt")
 # Open file in "write" mode ('w') .
 with open(poll_path, 'w') as text_file:
 
     # write lines into the file
     text_file.write("Election Results \n----------------------------")
-    text_file.write(f"\nTotal Votes: {total_votes}\n----------------------------)
+    text_file.write(f"\nTotal Votes: {total_votes}\n----------------------------")
     
