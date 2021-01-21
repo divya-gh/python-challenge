@@ -1,6 +1,6 @@
 import os
 import csv
-os.system("cls")
+
 
 #Function to calculate changes in "Profit/Losses" over the entire period and thier average change
 '''------------------------------------------------------------------------------------------'''
@@ -80,7 +80,7 @@ print(f"Greatest Decrease in Profits: {loss_date} (${greatest_decrease})")
 #5 print the analysis in a text file with the results.
 '''------------------------------------------------'''
 #set file path
-file_path = os.path.join(".", "analysis", "Py_Bank_analysis.txt")
+file_path = os.path.join("analysis", "Py_Bank_analysis.txt")
 
 # Open file in "write" mode ('w') .
 with open(file_path, 'w') as text_file:
