@@ -20,13 +20,12 @@ with open(py_poll_path, newline='') as csvfile:
 
     #seperate header
     header = next(csvreader)
-    #read rows
-
+    
+    #read rows from the file
     for row in csvreader:
         #calculating total votes
         total_votes+= 1
         #get unique candidates
-
         if row[2] not in candidates:
             candidates.append(row[2])
             #calculate total votes per candidates and add them to a dictionary.
@@ -63,7 +62,6 @@ poll_path = os.path.join(".", "analysis", "Poll_analysis.txt")
 # Open file in "write" mode ('w') 
 
 with open(poll_path, 'w') as text_file:
-
     # write lines to file
     text_file.write("Election Results \n----------------------------")
     text_file.write(f"\nTotal Votes: {total_votes}\n----------------------------")
